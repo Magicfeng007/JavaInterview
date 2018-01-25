@@ -18,7 +18,7 @@ public class ReadFromKeybord {
             byte[] bytes = new byte[1];
             System.in.read(bytes);
             String line = new String(bytes);
-//            i1 = Integer.parseInt(new String(bytes));
+            i1 = Integer.parseInt(new String(bytes));
             System.out.print("第一个整数：" + line);
 
             System.out.print("请输入第二个整数：");
