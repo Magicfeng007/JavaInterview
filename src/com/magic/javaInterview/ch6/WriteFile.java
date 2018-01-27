@@ -1,12 +1,14 @@
 package com.magic.javaInterview.ch6;
 
 import java.io.*;
+import java.io.Serializable;
+import java.util.List;
 
 public class WriteFile {
     public static void main(String[] args){
         WriteFile writeFile = new WriteFile();
 //        writeFile.writeStringToFileByFileWriter("testWriteStringToFile","/home/magic/test/testWrite/");
-        writeFile.writeStringToFIleByFileOutputStream("testWriteStringToFile","/home/magic/test/testWrite/","myfile.txt");
+        writeFile.writeStringToFileByFileOutputStream("testWriteStringToFile","/home/magic/test/testWrite/","myfile.txt");
     }
 
     public void writeStringToFileByFileWriter(String str,String filePath,String fileName){
@@ -41,7 +43,7 @@ public class WriteFile {
         }
     }
 
-    public void writeStringToFIleByFileOutputStream(String str,String filePath,String fileName){
+    public void writeStringToFileByFileOutputStream(String str, String filePath, String fileName){
         File file = new File(filePath);
         BufferedWriter bufferedWriter = null;
         try{
@@ -73,6 +75,36 @@ public class WriteFile {
                 bufferedWriter.write(str);
                 bufferedWriter.flush();
                 bufferedWriter.close();
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void writeObjectToFileByFileOutputStream(List<?> serializableList, String filePath, String fileName){
+        File file = new File(filePath);
+        try{
+            if (file.exists()){
+                if(file.isDirectory()){
+                    File targetFile = new File(file.getPath() + File.separator + fileName);
+                    if(targetFile.exists() && targetFile.isFile()){
+                        OutputStream outputStream = new FileOutputStream(file.getPath() + File.separator + fileName,false);
+                        ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+                        objectOutputStream.writeObject(serializableList);
+                        objectOutputStream.close();
+                    }else {
+                        OutputStream outputStream = new FileOutputStream(file.getPath() + File.separator + fileName);
+                        ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+                        objectOutputStream.writeObject(serializableList);
+                        objectOutputStream.close();
+                    }
+                }
+            }else {
+                file.mkdirs();
+                OutputStream outputStream = new FileOutputStream(file.getPath() + File.separator + fileName);
+                ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+                objectOutputStream.writeObject(serializableList);
+                objectOutputStream.close();
             }
         }catch (IOException e){
             e.printStackTrace();

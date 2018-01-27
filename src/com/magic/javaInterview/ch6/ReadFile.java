@@ -2,6 +2,8 @@ package com.magic.javaInterview.ch6;
 
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReadFile {
     public static void main(String[] args){
@@ -102,5 +104,17 @@ public class ReadFile {
         }catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    public Object readerObjectFromFile(String filePath, String fileName){
+        try {
+            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filePath + File.separator + fileName));
+            return objectInputStream.readObject();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
