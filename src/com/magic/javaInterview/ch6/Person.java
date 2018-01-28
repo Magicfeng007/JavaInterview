@@ -1,15 +1,17 @@
 package com.magic.javaInterview.ch6;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
-public class Person implements Serializable {
+public class Person implements Serializable,Cloneable {
 
     private static final long serialVersionUID = 8813140729968935758L;
     private String name;
     private String gender;
     private int age;
     private double salary;
+    private Date hireDate;
 
     public Person() {
     }
@@ -19,6 +21,14 @@ public class Person implements Serializable {
         this.gender = gender;
         this.age = age;
         this.salary = salary;
+    }
+
+    public Date getHireDate() {
+        return hireDate;
+    }
+
+    public void setHireDate(Date hireDate) {
+        this.hireDate = hireDate;
     }
 
     public String getName() {
