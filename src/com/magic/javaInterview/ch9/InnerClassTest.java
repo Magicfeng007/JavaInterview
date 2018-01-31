@@ -1,12 +1,11 @@
 package com.magic.javaInterview.ch9;
 
-import java.util.Date;
-
 public class InnerClassTest implements Cloneable {
 
     public static void main(String[] args) {
-
-
+        StaticClass staticClass = new StaticClass("nnn");
+        InnerClassTest innerClassTest = new InnerClassTest();
+        PublicClss p = innerClassTest.createPublicClass();
 
     }
 
@@ -43,5 +42,10 @@ public class InnerClassTest implements Cloneable {
         public void setCc(String cc) {
             this.cc = cc;
         }
+    }
+
+    public PublicClss createPublicClass(){
+        PublicClss p = new PublicClss();
+        return p;
     }
 }
